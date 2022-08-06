@@ -6,5 +6,6 @@ public class Example : MonoBehaviour
 {
     void OnMouseDown() {
         Debug.Log("Hello world!");
+        Time.timeScale = 0;
     }
 }

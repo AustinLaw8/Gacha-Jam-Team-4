@@ -5,13 +5,13 @@ using UnityEngine;
 public class Enemy1Spawner : MonoBehaviour
 {
 
-    public GameObject Enemy1;
+    [SerializeField] private GameObject Enemy1;
 
     private float time = 0;
-    public float spawnTime = 1f;
+    [SerializeField] private float spawnTime = 1f;
 
-    public float maxLeft = -3f;
-    public float maxRight = 3f;
+    [SerializeField] private float maxLeft = -3f;
+    [SerializeField] private float maxRight = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +22,11 @@ public class Enemy1Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time > spawnTime && GameLogic.inprogress) 
+        if (time > spawnTime) 
         {
             GameObject enemy = Instantiate(Enemy1);
-            enemy.transform.position = transform.position = new Vector2(Random.Range(maxLeft, maxRight), 0); //spawn in the right place
-            Destroy(Enemy1, 10); //destroy barrier after 10 seconds to prevent memory loss
+            enemy.transform.position = new Vector2(Random.Range(maxLeft, maxRight), 0); //spawn in the right place
+            Destroy(enemy, 10); //destroy barrier after 10 seconds to prevent memory loss
             time = 0;
         }
 
