@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    // [SerializeField] private Player player; //when player class is created
+    [SerializeField] private Player player; //when player class is created
     private static int NUM_PARTS_IN_SECTION = 3;
     private static Vector3 START_POS = Vector3.zero;
     private static Vector3 GAP = new Vector3(5,0,0);
@@ -15,12 +15,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject SECTION_BLANK;
     [SerializeField] private List<GameObject> LEVEL_PARTS;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text fuelText;
+
+
 
     private float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
     private float score;
+
     private int boosts;
+  
 
     public void DestroyLastSection(){
         Destroy(currentSection);
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
         nextSection = generateSection();
     }
 
+
     void Start()
     {
         // if (player == null) { Debug.Error("Player not set"); Destroy(this) }
@@ -40,14 +46,20 @@ public class GameManager : MonoBehaviour
         if (scoreText == null) {
             scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
         }
+        if (fuelText == null)
+        {
+            fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
+        }
         currentSection = generateSection();
         currentSpeed = START_SPEED;
+        
     }
 
     void Update()
     {
         score += Time.deltaTime + (boosts * 500); //500 points for each boost they get
         scoreText.text = "Score: " + (int)score;
+        fuelText.text = "Fuel: " + player.getFuel(); //replace with taylors art
         currentSection.transform.position = new Vector3(currentSection.transform.position.x - currentSpeed * Time.deltaTime,0f,0f);
     }
 
