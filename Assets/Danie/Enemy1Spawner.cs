@@ -22,7 +22,7 @@ public class Enemy1Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time > spawnTime && GameLogic.inprogress) 
+        if (time > spawnTime) 
         {
             GameObject enemy = Instantiate(Enemy1);
             enemy.transform.position = transform.position = new Vector2(Random.Range(maxLeft, maxRight), 0); //spawn in the right place
