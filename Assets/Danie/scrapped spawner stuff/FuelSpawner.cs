@@ -22,7 +22,7 @@ public class FuelSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time > spawnTime && GameLogic.inprogress) 
+        if (time > spawnTime) 
         {
             GameObject item1 = Instantiate(Item);
             item1.transform.position = new Vector2(Random.Range(maxLeft, maxRight), 0); //spawn in the right place

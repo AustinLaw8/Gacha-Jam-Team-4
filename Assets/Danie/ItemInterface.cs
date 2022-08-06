@@ -1,16 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class PickUpObject : MonoBehaviour
+interface ItemPickUp
 {
-
-    interface ItemPickUp<T>
-    {
-        void OnTriggerEnter2D(Collider2D hit); //collision
+    void PickUpAction(); //when player collides with item, what it does
         
-
-    }
-
-
 }
+
+
