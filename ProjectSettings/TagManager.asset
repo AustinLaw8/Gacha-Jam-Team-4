@@ -7,6 +7,7 @@ TagManager:
   - Undefined
   - Fuel
   - Enemy
+  - Section
   layers:
   - Default
   - TransparentFX
