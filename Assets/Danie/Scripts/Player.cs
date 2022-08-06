@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     void OnFly(InputAction action)
     {
         rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        Debug.Log("Action");
 
     }
     // Update is called once per frame
