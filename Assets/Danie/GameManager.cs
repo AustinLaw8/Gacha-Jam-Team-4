@@ -8,9 +8,10 @@ public class GameManager : MonoBehaviour
 {
     // [SerializeField] private Player player; //when player class is created
     private static int NUM_PARTS_IN_SECTION = 3;
-    private static Vector3 START_POS = Vector3.zero;
+    private static Vector3 SECTION_START_POS = new Vector3(36.5f,0,0);
+    private static Vector3 PART_START_POS = new Vector3(-16.5f,0,0);
     private static Vector3 GAP = new Vector3(5,0,0);
-    private static float START_SPEED = 2f;
+    private static float START_SPEED = 5f;
 
     [SerializeField] private GameObject SECTION_BLANK;
     [SerializeField] private List<GameObject> LEVEL_PARTS;
@@ -48,17 +49,17 @@ public class GameManager : MonoBehaviour
     {
         score += Time.deltaTime + (boosts * 500); //500 points for each boost they get
         scoreText.text = "Score: " + (int)score;
-        currentSection.transform.position = new Vector3(currentSection.transform.position.x - currentSpeed * Time.deltaTime,0f,0f);
+        currentSection.transform.position = new Vector3(currentSection.transform.position.x - currentSpeed * Time.deltaTime, 0f, 0f);
+        if(nextSection != null) nextSection.transform.position = new Vector3(nextSection.transform.position.x - currentSpeed * Time.deltaTime, 0f, 0f);
     }
 
     GameObject generateSection()
     {
-        GameObject section = Instantiate(SECTION_BLANK);
-        Vector3 pos = START_POS;
+        GameObject section = Instantiate(SECTION_BLANK, SECTION_START_POS, Quaternion.identity);
         for (int i = 0; i < NUM_PARTS_IN_SECTION; i++)
         {
             Instantiate(LEVEL_PARTS[Random.Range(0, LEVEL_PARTS.Count)],
-                    START_POS + GAP * i,
+                    SECTION_START_POS + PART_START_POS + GAP * i,
                     Quaternion.identity,
                     section.transform);
         }

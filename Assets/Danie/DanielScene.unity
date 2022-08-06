@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -837,6 +838,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 599399154177697352, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568426308853708039, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
+      propertyPath: m_NotificationBehavior
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9031299229129322017, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
