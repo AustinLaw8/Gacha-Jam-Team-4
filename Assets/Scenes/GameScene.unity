@@ -237,11 +237,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 892341432, guid: bb1d875d5091d466286566662f3a1825, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 497
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 605892924787098461, guid: bb1d875d5091d466286566662f3a1825, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 698639752151432065, guid: bb1d875d5091d466286566662f3a1825, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -750
       objectReference: {fileID: 0}
     - target: {fileID: 3966674642498110258, guid: bb1d875d5091d466286566662f3a1825, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -249,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3966674642498110258, guid: bb1d875d5091d466286566662f3a1825, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 5610668747185010305, guid: bb1d875d5091d466286566662f3a1825, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2259,6 +2263,10 @@ PrefabInstance:
     - target: {fileID: 6291421343600594737, guid: 34c6c650097d040b180a0601a3799d55, type: 3}
       propertyPath: m_Name
       value: DeathScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291421343600594737, guid: 34c6c650097d040b180a0601a3799d55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6291421343600594749, guid: 34c6c650097d040b180a0601a3799d55, type: 3}
       propertyPath: m_Pivot.x
