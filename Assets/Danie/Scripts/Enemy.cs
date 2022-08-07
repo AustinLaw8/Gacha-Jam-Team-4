@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void SnapToPath(float time)
     {
-        transform.position = Vector3.Lerp(startPos, endPos, (Mathf.Sin(time * speed) + 1) * .5f);
+        transform.localPosition = Vector3.Lerp(startPos, endPos, (Mathf.Sin(time * speed) + 1) * .5f);
     }
 
     void Start()
@@ -57,14 +57,13 @@ public abstract class Enemy : MonoBehaviour
     {
         if (data.gameObject.tag == "Player")
         {
-            Player player = data.GetComponent<Player>();
-            Debug.Log("Player collided w/ enemy");
-            // if (player.boosted) {
-            //     player.incScore(SCORE_BONUS);
-            //     Destroy(this.gameObject);
-            // } else {
-            //     player.die();
-            // }
+            Player player = data.gameObject.GetComponent<Player>();
+            if (player.isBoosted()) {
+                player.incScore(SCORE_BONUS);
+                Destroy(this.gameObject);
+            } else {
+                player.die();
+            }
         }
     }
 }

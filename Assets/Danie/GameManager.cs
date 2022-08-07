@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     private float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
-    private float score;
-    private int boosts;
+    public float score;
+    // private int boosts;
   
     public void DestroyLastSection()
     {
@@ -40,23 +40,17 @@ public class GameManager : MonoBehaviour
     {
         // if (player == null) { Debug.Error("Player not set"); Destroy(this) }
         score = 0;
-        boosts = 0;
-        if (scoreText == null) {
-            scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
-        }
-        if (fuelText == null)
-        {
-            fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
-        }
+        if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
+        if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
         currentSection = generateSection();
         currentSpeed = START_SPEED;
     }
 
     void Update()
     {
-        score += Time.deltaTime + (boosts * 500); //500 points for each boost they get
+        score += currentSpeed;
         scoreText.text = "Score: " + (int)score;
-        fuelText.text = "Fuel: " + player.getFuel(); //replace with taylors art
+        fuelText.text = "Fuel: " + player.getFuel();
     }
 
     void FixedUpdate()

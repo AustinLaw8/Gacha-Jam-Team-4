@@ -5,25 +5,41 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private static float X_POSITION = -6.5f;
+    private static float RESTORATION_TIME = .33f;
+    private static float MAX_TIME_OFF_SCREEN = 2f;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float jumpAmount = 100f;
     [SerializeField] private float fuel = 100f;
-    [SerializeField] private bool boosted = false;
-    [SerializeField] private bool flying = false;
+    [SerializeField] private bool boosted { get; set; }
+    [SerializeField] private bool flying { get; set; }
 
+    private float timeOffScreen;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        boosted = false;
+        flying = false;
         rb = GetComponent<Rigidbody2D>();
+        if (gameManager == null) gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void FixedUpdate()
     {
         if (flying && fuel > 0)
         {
-            rb.velocity = new Vector3(0, jumpAmount, 0);
+            rb.velocity = new Vector3(rb.velocity.x, jumpAmount, 0);
             fuel -= 10 * Time.deltaTime;
+        }
+        if (transform.position.x != X_POSITION)
+        {
+            attemptToCatchUp();
+        }
+        else 
+        {
+            rb.velocity = new Vector3(0,rb.velocity.y,0);
         }
     }
 
@@ -39,16 +55,32 @@ public class Player : MonoBehaviour
 
     public void incFuel()
     {
-        fuel = fuel + 20;
+        fuel += 20;
+    }
+
+    public void incScore(int amount)
+    {
+        gameManager.score += amount;
     }
 
     public void die()
     {
-        if(this.transform.position.y < -8.2) //when player falls underneath floor
+       
+        Debug.Log("player die");
+    }
+
+    public bool isBoosted()
+    {
+        return boosted;
+    }
+
+    private void attemptToCatchUp()
+    {
+        timeOffScreen += Time.deltaTime;
+        rb.velocity = new Vector3((X_POSITION - transform.position.x)/RESTORATION_TIME,rb.velocity.y,0);
+        if (timeOffScreen > MAX_TIME_OFF_SCREEN)
         {
-            Time.timeScale = 0;
-            
+            die();
         }
-        
     }
 }

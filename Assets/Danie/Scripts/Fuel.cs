@@ -7,5 +7,4 @@ public class Fuel : PickupObject
     public override void pickupAction(Player player) {
         player.incFuel();
     }
-
 }
