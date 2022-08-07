@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(this.transform.position.y < -8.2) //when player falls underneath floor
+        {
+            Time.timeScale = 0;
+            
+        }
         
     }
 
