@@ -186,6 +186,22 @@ PrefabInstance:
       propertyPath: instructionsCanvas
       value: 
       objectReference: {fileID: 2043876997}
+    - target: {fileID: 6649745086325263401, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.46488762
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649745086325263401, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.7766583
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649745086325263401, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.1074438
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649745086325263401, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.22851717
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 839b7a4baa2a80845b8a6c82a985eaa0, type: 3}
 --- !u!1001 &140743957
