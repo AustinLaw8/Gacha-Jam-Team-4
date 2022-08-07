@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (flying)
+        if (flying && fuel > 0)
         {
             rb.velocity = new Vector3(0, jumpAmount, 0);
             fuel -= 10 * Time.deltaTime;

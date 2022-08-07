@@ -13,5 +13,6 @@ public abstract class PickupObject : MonoBehaviour
             pickupAction(data.GetComponent<Player>());
             Destroy(this.gameObject);
         }
+
     }
 }
