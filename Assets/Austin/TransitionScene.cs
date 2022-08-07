@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TransitionScene : MonoBehaviour
 {
-    [SerializeField] private string sceneToTransition;
-
-    public void transition()
+    public void transition(string sceneName)
     {
-        SceneManager.LoadScene(sceneToTransition);
+        SceneManager.LoadScene(sceneName);
     }
 }

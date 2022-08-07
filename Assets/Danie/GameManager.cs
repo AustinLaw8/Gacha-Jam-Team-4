@@ -17,14 +17,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject SECTION_BLANK;
     [SerializeField] private List<GameObject> LEVEL_PARTS;
     [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text fuelText;
+    // [SerializeField] private TMP_Text fuelText;
 
     public float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
     private Queue<GameObject> levelParts = new Queue<GameObject>();
     public float score;
-    // private int boosts;
   
     public void DestroyLastSection()
     {
@@ -62,7 +61,7 @@ public class GameManager : MonoBehaviour
         if (mainCamera == null) mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         if (player == null) player = GameObject.Find("Player").GetComponent<Player>();
         if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
-        if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
+        // if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
         score = 0;
         currentSection = Instantiate(SECTION_BLANK, Vector3.zero, Quaternion.identity);
         currentSpeed = START_SPEED;
@@ -80,7 +79,7 @@ public class GameManager : MonoBehaviour
                     mainCamera.transform.position.z);
         }
         scoreText.text = "Score: " + (int)score;
-        fuelText.text = "Fuel: " + player.getFuel();
+        // fuelText.text = "Fuel: " + player.getFuel();
     }
 
     void FixedUpdate()
@@ -91,5 +90,15 @@ public class GameManager : MonoBehaviour
         foreach (GameObject obj in levelParts)
             obj.transform.position -= speedVec;
         currentSpeed += Time.deltaTime * SPEED_INCREASE_RATE;
+    }
+
+    public void OnPause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void OnPlay()
+    {
+        Time.timeScale = 1;
     }
 }
