@@ -6,10 +6,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private static int NUM_PARTS_IN_SECTION = 3;
+    private static float SPEED_INCREASE_RATE = .2f;
     private static Vector3 SECTION_START_POS = new Vector3(36.5f,0,0);
     private static Vector3 PART_START_POS = new Vector3(-16.5f,0,0);
     private static Vector3 GAP = new Vector3(5,0,0);
+    private static int NUM_PARTS_IN_SECTION = 3;
     private static float START_SPEED = 5f;
 
     [SerializeField] private Player player;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         currentSection.transform.position = new Vector3(currentSection.transform.position.x - currentSpeed * Time.deltaTime,0f,0f);
         if(nextSection != null) nextSection.transform.position = new Vector3(nextSection.transform.position.x - currentSpeed * Time.deltaTime, 0f, 0f);
+        currentSpeed += Time.deltaTime * SPEED_INCREASE_RATE;
     }
 
     GameObject generateSection()
