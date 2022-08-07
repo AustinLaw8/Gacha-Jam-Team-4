@@ -421,7 +421,10 @@ MonoBehaviour:
   - {fileID: 1708719405861328554, guid: af1cb21545230c24ba3ef0bac06dd9ef, type: 3}
   - {fileID: 4446617881715710641, guid: d0b9c7a916065f24fb27ea25d441fa83, type: 3}
   - {fileID: 4446617881715710641, guid: 578e5a17a5033d64ab0646b07ca1fa63, type: 3}
+  - {fileID: 4446617881715710641, guid: 5dee73cbcb34a3a419450e8fee5fdf36, type: 3}
+  - {fileID: 4446617881715710641, guid: 29ef606e902c920409ee8a7697998f7b, type: 3}
   scoreText: {fileID: 1724718802}
+  fuelSlider: {fileID: 0}
   currentSpeed: 0
   score: 0
 --- !u!1 &1311093233

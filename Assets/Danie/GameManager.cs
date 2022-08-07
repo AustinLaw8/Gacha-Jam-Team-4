@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private static Color FUEL_FULL = new Color(252f/255f, 77f/255f, 64f/255f);
+    private static Color FUEL_LOW = new Color(239f/255f, 167f/255f, 54f/255f);
     private static float SPEED_INCREASE_RATE = .2f;
     private static float CEILING_HEIGHT = 9f;
     private static float OFFSCREEN_LIM = 9.5f;
@@ -17,9 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject SECTION_BLANK;
     [SerializeField] private List<GameObject> LEVEL_PARTS;
     [SerializeField] private TMP_Text scoreText;
-    // [SerializeField] private TMP_Text fuelText;
+    [SerializeField] private GameObject fuelSlider;
 
-    public bool boosted;
     public float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
@@ -62,12 +64,12 @@ public class GameManager : MonoBehaviour
         if (mainCamera == null) mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         if (player == null) player = GameObject.Find("Player").GetComponent<Player>();
         if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
-        // if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
+        if (fuelSlider == null) fuelSlider = GameObject.Find("Fuel Slider");
         score = 0;
         currentSection = Instantiate(SECTION_BLANK, Vector3.zero, Quaternion.identity);
         currentSpeed = START_SPEED;
         GenerateNextPart();
-        boosted = false;
+        
     }
 
     void Update()
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
                     mainCamera.transform.position.z);
         }
         scoreText.text = "Score: " + (int)score;
-        // fuelText.text = "Fuel: " + player.getFuel();
+        
     }
 
     void FixedUpdate()
@@ -94,17 +96,26 @@ public class GameManager : MonoBehaviour
         currentSpeed += Time.deltaTime * SPEED_INCREASE_RATE;
     }
 
-    public void BoostPlayer()
-    {
-        currentSpeed = currentSpeed * SPEED_INCREASE_RATE;
-    }
+   
+
+
     public void OnPause()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 1; //change back to 0
     }
 
     public void OnPlay()
     {
         Time.timeScale = 1;
     }
+
+    public void boostEffect()
+    {
+        currentSpeed = currentSpeed * 2; //change to whatever boost multiplier
+    }
+    public void OnPlayerDie()
+    {
+        OnPause();
+    }
+
 }

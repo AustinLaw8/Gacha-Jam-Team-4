@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (flying)
+        if (flying && fuel > 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpAmount, 0);
             fuel -= 10 * Time.deltaTime;
@@ -75,12 +75,17 @@ public class Player : MonoBehaviour
 
     public void die()
     {
-        Debug.Log("player die");
+        gameManager.OnPlayerDie();
     }
 
     public bool isBoosted()
     {
         return boosted;
+    }
+
+    public void boostPlayer()
+    {
+        gameManager.boostEffect();
     }
 
     private void attemptToCatchUp()
