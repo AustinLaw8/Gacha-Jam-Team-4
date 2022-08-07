@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private static Color FUEL_FULL = new Color(252f/255f, 77f/255f, 64f/255f);
+    private static Color FUEL_LOW = new Color(239f/255f, 167f/255f, 54f/255f);
     private static float SPEED_INCREASE_RATE = .2f;
     private static float CEILING_HEIGHT = 9f;
     private static float OFFSCREEN_LIM = 9.5f;
@@ -17,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject SECTION_BLANK;
     [SerializeField] private List<GameObject> LEVEL_PARTS;
     [SerializeField] private TMP_Text scoreText;
-    // [SerializeField] private TMP_Text fuelText;
+    [SerializeField] private GameObject fuelSlider;
 
     public float currentSpeed;
     private GameObject currentSection;
@@ -61,7 +64,7 @@ public class GameManager : MonoBehaviour
         if (mainCamera == null) mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         if (player == null) player = GameObject.Find("Player").GetComponent<Player>();
         if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
-        // if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
+        if (fuelSlider == null) fuelSlider = GameObject.Find("Fuel Slider");
         score = 0;
         currentSection = Instantiate(SECTION_BLANK, Vector3.zero, Quaternion.identity);
         currentSpeed = START_SPEED;
@@ -79,7 +82,7 @@ public class GameManager : MonoBehaviour
                     mainCamera.transform.position.z);
         }
         scoreText.text = "Score: " + (int)score;
-        // fuelText.text = "Fuel: " + player.getFuel();
+        updateFuelSlider();
     }
 
     void FixedUpdate()
@@ -92,6 +95,25 @@ public class GameManager : MonoBehaviour
         currentSpeed += Time.deltaTime * SPEED_INCREASE_RATE;
     }
 
+    void updateFuelSlider()
+    {
+        Color color;
+        if (player.getFuel() > 50) {
+            color = FUEL_FULL;
+        } else {
+            color = FUEL_LOW;
+        }
+        if (player.getFuel() > 0) {
+            Image img = fuelSlider.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+            // img.SetEnabled(true);
+            img.color = color;
+            fuelSlider.GetComponent<Slider>().value = player.getFuel() / 100;
+        } else {
+            // fuelSlider.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().SetEnabled(false);
+        }
+    
+    }
+
     public void OnPause()
     {
         Time.timeScale = 0;
@@ -101,4 +123,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+
+    public void OnPlayerDie()
+    {
+        OnPause();
+    }
+
 }
