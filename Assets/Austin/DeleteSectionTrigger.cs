@@ -12,8 +12,15 @@ public class DeleteSectionTrigger : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D hit){
-        if (hit.gameObject.tag == "Section") {
-            gameManager.DestroyLastSection();
+        switch (hit.gameObject.tag)
+        {
+            case "Section":
+                gameManager.DestroyLastSection();
+                break;
+            case "EndMarker":
+                Destroy(hit.transform.parent.gameObject);
+                gameManager.ClearParts();
+                break;
         }
     }
 }

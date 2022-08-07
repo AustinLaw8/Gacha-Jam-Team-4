@@ -12,7 +12,6 @@ public class ScreenEndTrigger : MonoBehaviour
     }
     
     void OnTriggerEnter2D(Collider2D hit){
-        Debug.Log(hit);
         if (hit.gameObject.tag == "EndMarker") {
             gameManager.GenerateNextPart();
         }

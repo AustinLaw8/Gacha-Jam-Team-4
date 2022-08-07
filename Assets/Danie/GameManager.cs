@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
-    private List<GameObject> levelParts = new List<GameObject>();
+    private Queue<GameObject> levelParts = new Queue<GameObject>();
     public float score;
     // private int boosts;
   
@@ -45,10 +45,15 @@ public class GameManager : MonoBehaviour
                 OFFSCREEN_LIM - nextPart.transform.Find("StartPosition").transform.position.x,
                 0f,
                 0f);
-        levelParts.Add(Instantiate(
+        levelParts.Enqueue(Instantiate(
                 nextPart,
                 spawnLoc,
                 Quaternion.identity));
+    }
+
+    public void ClearParts()
+    {
+        levelParts.Dequeue();
     }
 
     void Start()
