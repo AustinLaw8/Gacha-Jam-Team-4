@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         playCanvas.SetActive(false);
         deathScreen.SetActive(true);
+        deathScreen.transform.Find("Score Text").gameObject.GetComponent<TMP_Text>().text = ((int)score).ToString();
     }
 
     public void ResetGame()
