@@ -11,7 +11,7 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private Vector3 startPos = new Vector3(-10, 0f, 0f);
     [SerializeField] private Vector3 endPos = new Vector3(10f, 0f, 0f);
-    [SerializeField] private float moveSpeed = .2f;
+    [SerializeField] private float moveSpeed = 2f;
     
     protected abstract void OnStart();
     protected abstract void act();

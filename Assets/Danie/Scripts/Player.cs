@@ -28,18 +28,28 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (flying && fuel > 0)
+        if (flying)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpAmount, 0);
             fuel -= 10 * Time.deltaTime;
         }
-        if (transform.position.x != X_POSITION)
+        if (!Mathf.Approximately(transform.position.x, X_POSITION))
         {
             attemptToCatchUp();
         }
         else 
         {
+            timeOffScreen = 0f;
             rb.velocity = new Vector3(0,rb.velocity.y,0);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D hit)
+    {
+        if(hit.gameObject.tag == "Ground")
+        {
+            Debug.Log("bump");
+            this.transform.position -= new Vector3(0,.1f,0);
         }
     }
 
@@ -65,7 +75,6 @@ public class Player : MonoBehaviour
 
     public void die()
     {
-       
         Debug.Log("player die");
     }
 

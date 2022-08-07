@@ -7,6 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private static float SPEED_INCREASE_RATE = .2f;
+    private static float CEILING_HEIGHT = 10f;
     private static Vector3 SECTION_START_POS = new Vector3(36.5f,0,0);
     private static Vector3 PART_START_POS = new Vector3(-16.5f,0,0);
     private static Vector3 GAP = new Vector3(5,0,0);
@@ -14,12 +15,13 @@ public class GameManager : MonoBehaviour
     private static float START_SPEED = 5f;
 
     [SerializeField] private Player player;
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject SECTION_BLANK;
     [SerializeField] private List<GameObject> LEVEL_PARTS;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text fuelText;
 
-    private float currentSpeed;
+    public float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
     public float score;
@@ -39,10 +41,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // if (player == null) { Debug.Error("Player not set"); Destroy(this) }
-        score = 0;
+        if (mainCamera == null) mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        if (player == null) player = GameObject.Find("Player").GetComponent<Player>();
         if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
         if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
+        score = 0;
         currentSection = generateSection();
         currentSpeed = START_SPEED;
     }
@@ -50,6 +53,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         score += currentSpeed;
+        if (player.transform.position.y > 0 || player.transform.position.y < CEILING_HEIGHT)
+        {
+            mainCamera.transform.position = new Vector3(
+                    mainCamera.transform.position.x,
+                    player.transform.position.y,
+                    mainCamera.transform.position.z);
+        }
         scoreText.text = "Score: " + (int)score;
         fuelText.text = "Fuel: " + player.getFuel();
     }
