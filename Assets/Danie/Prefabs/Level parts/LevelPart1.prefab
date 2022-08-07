@@ -103,6 +103,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1708719405861328555}
     m_Modifications:
+    - target: {fileID: 1005301040583228922, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
+      propertyPath: endPos.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005301040583228922, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
+      propertyPath: endPos.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005301040583228922, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005301040583228922, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
+      propertyPath: startPos.x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005301040583228922, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
+      propertyPath: startPos.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1780692616861428784, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
       propertyPath: m_Name
       value: Enemy1
@@ -125,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1780692616861428788, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 0.2788968
       objectReference: {fileID: 0}
     - target: {fileID: 1780692616861428788, guid: cd15f6d00671b415abff5898be18b7bf, type: 3}
       propertyPath: m_LocalPosition.y
