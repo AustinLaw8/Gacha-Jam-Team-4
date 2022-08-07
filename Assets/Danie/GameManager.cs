@@ -7,11 +7,9 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private static float SPEED_INCREASE_RATE = .2f;
-    private static float CEILING_HEIGHT = 10f;
-    private static Vector3 SECTION_START_POS = new Vector3(36.5f,0,0);
-    private static Vector3 PART_START_POS = new Vector3(-16.5f,0,0);
-    private static Vector3 GAP = new Vector3(5,0,0);
-    private static int NUM_PARTS_IN_SECTION = 3;
+    private static float CEILING_HEIGHT = 9f;
+    private static float OFFSCREEN_LIM = 9.5f;
+    private static Vector3 SECTION_LOAD_POS = new Vector3(36.5f,0,0);
     private static float START_SPEED = 5f;
 
     [SerializeField] private Player player;
@@ -24,6 +22,7 @@ public class GameManager : MonoBehaviour
     public float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
+    private List<GameObject> levelParts = new List<GameObject>();
     public float score;
     // private int boosts;
   
@@ -36,24 +35,39 @@ public class GameManager : MonoBehaviour
 
     public void GenerateNextSection()
     {
-        nextSection = generateSection();
+        nextSection = Instantiate(SECTION_BLANK, SECTION_LOAD_POS, Quaternion.identity);
+    }
+
+    public void GenerateNextPart()
+    {
+        GameObject nextPart = LEVEL_PARTS[Random.Range(0, LEVEL_PARTS.Count)];
+        Vector3 spawnLoc = new Vector3(
+                OFFSCREEN_LIM - nextPart.transform.Find("StartPosition").transform.position.x,
+                0f,
+                0f);
+        levelParts.Add(Instantiate(
+                nextPart,
+                spawnLoc,
+                Quaternion.identity));
     }
 
     void Start()
     {
+        OFFSCREEN_LIM = GameObject.Find("ScreenEndTrigger").transform.position.x;
         if (mainCamera == null) mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         if (player == null) player = GameObject.Find("Player").GetComponent<Player>();
         if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
         if (fuelText == null) fuelText = GameObject.Find("Fuel Text").GetComponent<TMP_Text>();
         score = 0;
-        currentSection = generateSection();
+        currentSection = Instantiate(SECTION_BLANK, Vector3.zero, Quaternion.identity);
         currentSpeed = START_SPEED;
+        GenerateNextPart();
     }
 
     void Update()
     {
         score += currentSpeed;
-        if (player.transform.position.y > 0 || player.transform.position.y < CEILING_HEIGHT)
+        if (player.transform.position.y > 0 && player.transform.position.y < CEILING_HEIGHT)
         {
             mainCamera.transform.position = new Vector3(
                     mainCamera.transform.position.x,
@@ -66,21 +80,11 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentSection.transform.position = new Vector3(currentSection.transform.position.x - currentSpeed * Time.deltaTime,0f,0f);
-        if(nextSection != null) nextSection.transform.position = new Vector3(nextSection.transform.position.x - currentSpeed * Time.deltaTime, 0f, 0f);
+        Vector3 speedVec = new Vector3(currentSpeed,0f,0f) * Time.deltaTime;
+        currentSection.transform.position -= speedVec;
+        if(nextSection != null) nextSection.transform.position -= speedVec;
+        foreach (GameObject obj in levelParts)
+            obj.transform.position -= speedVec;
         currentSpeed += Time.deltaTime * SPEED_INCREASE_RATE;
-    }
-
-    GameObject generateSection()
-    {
-        GameObject section = Instantiate(SECTION_BLANK, SECTION_START_POS, Quaternion.identity);
-        for (int i = 0; i < NUM_PARTS_IN_SECTION; i++)
-        {
-            Instantiate(LEVEL_PARTS[Random.Range(0, LEVEL_PARTS.Count)],
-                    SECTION_START_POS + PART_START_POS + GAP * i,
-                    Quaternion.identity,
-                    section.transform);
-        }
-        return section;
     }
 }

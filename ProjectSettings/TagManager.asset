@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Section
   - Ground
+  - EndMarker
   layers:
   - Default
   - TransparentFX
