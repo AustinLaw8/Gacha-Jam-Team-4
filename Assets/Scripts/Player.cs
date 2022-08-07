@@ -14,8 +14,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject instructionsCanvas;
     [SerializeField] private float jumpAmount = 100f;
     [SerializeField] private float fuel = 100f;
-    [SerializeField] private bool boosted { get; set; }
-    [SerializeField] private bool flying { get; set; }
+    [SerializeField] private bool boosted;
+    [SerializeField] private bool flying;
+    [SerializeField] private bool grounded;
 
     private float timeOffScreen;
     private Animator anim;
@@ -36,15 +37,40 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb.velocity.y != 0) {
-            anim.Play("CatFly");
-        } else {
-            anim.Play("CatRun");
-        }
-        if (flying && fuel > 0)
+        
+        if (flying)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpAmount, 0);
-            fuel -= 10 * Time.deltaTime;
+            if (fuel > 0)
+            {
+                anim.Play("CatFly");
+                rb.velocity = new Vector3(rb.velocity.x, jumpAmount, 0);
+                fuel -= 10 * Time.deltaTime;
+            }
+            else
+            {
+                if (grounded)
+                {
+                    anim.Play("CatFall");
+                    rb.AddForce(new Vector3(0,10f,0), ForceMode2D.Impulse);
+                    grounded = false;
+                }
+                else
+                {
+                    anim.Play("CatRun");
+                }
+            }
+        } 
+        else
+        {
+            if (rb.velocity.y < 0)
+            {
+                anim.Play("CatFall");
+            }
+            else if (rb.velocity.y == 0)
+            {
+                grounded = true;
+                anim.Play("CatRun");
+            }
         }
         if (!Mathf.Approximately(transform.position.x, X_POSITION))
         {

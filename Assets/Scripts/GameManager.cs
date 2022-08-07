@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playCanvas;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject fuelSlider;
+    [SerializeField] private AudioSource music;
 
     public float currentSpeed;
     private GameObject currentSection;
@@ -152,5 +153,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+    }
+
+    public void OnVolumeChange()
+    {
+        music.volume = GameObject.Find("Volume Slider").GetComponent<Slider>().value;
     }
 }
