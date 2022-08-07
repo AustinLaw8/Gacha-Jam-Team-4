@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     // [SerializeField] private TMP_Text fuelText;
 
+    public bool boosted;
     public float currentSpeed;
     private GameObject currentSection;
     private GameObject nextSection;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         currentSection = Instantiate(SECTION_BLANK, Vector3.zero, Quaternion.identity);
         currentSpeed = START_SPEED;
         GenerateNextPart();
+        boosted = false;
     }
 
     void Update()
@@ -92,6 +94,10 @@ public class GameManager : MonoBehaviour
         currentSpeed += Time.deltaTime * SPEED_INCREASE_RATE;
     }
 
+    public void BoostPlayer()
+    {
+        currentSpeed = currentSpeed * SPEED_INCREASE_RATE;
+    }
     public void OnPause()
     {
         Time.timeScale = 0;
