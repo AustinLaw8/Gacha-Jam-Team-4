@@ -57,14 +57,13 @@ public abstract class Enemy : MonoBehaviour
     {
         if (data.gameObject.tag == "Player")
         {
-            Player player = data.GetComponent<Player>();
-            Debug.Log("Player collided w/ enemy");
-            // if (player.boosted) {
-            //     player.incScore(SCORE_BONUS);
-            //     Destroy(this.gameObject);
-            // } else {
-            //     player.die();
-            // }
+            Player player = data.gameObject.GetComponent<Player>();
+            if (player.isBoosted()) {
+                player.incScore(SCORE_BONUS);
+                Destroy(this.gameObject);
+            } else {
+                player.die();
+            }
         }
     }
 }

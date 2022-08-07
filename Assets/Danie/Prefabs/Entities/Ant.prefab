@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1780692616861428785}
   - component: {fileID: 1005301040583228922}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: Ant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,5 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6828aefb449244cb1685b6e3144a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPos: {x: -10, y: 0, z: 0}
+  endPos: {x: 10, y: 0, z: 0}
   moveSpeed: 0
-  dirX: 0
+  scoreBonus: 500
