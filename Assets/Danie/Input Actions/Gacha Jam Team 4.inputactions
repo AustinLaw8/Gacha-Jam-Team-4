@@ -27,7 +27,7 @@
                     "name": "Fly",
                     "type": "Value",
                     "id": "4ed7c73f-0bcc-4eb3-b074-4bce990eaacd",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true

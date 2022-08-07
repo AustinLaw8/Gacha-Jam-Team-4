@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void SnapToPath(float time)
     {
-        transform.position = Vector3.Lerp(startPos, endPos, (Mathf.Sin(time * speed) + 1) * .5f);
+        transform.localPosition = Vector3.Lerp(startPos, endPos, (Mathf.Sin(time * speed) + 1) * .5f);
     }
 
     void Start()
