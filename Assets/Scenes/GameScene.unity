@@ -433,6 +433,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6291421343600594737, guid: 34c6c650097d040b180a0601a3799d55, type: 3}
   m_PrefabInstance: {fileID: 6291421343415931172}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &554513242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5506450304045082568, guid: bb1d875d5091d466286566662f3a1825, type: 3}
+  m_PrefabInstance: {fileID: 140743957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &996182825 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5961525526487308562, guid: bb1d875d5091d466286566662f3a1825, type: 3}
@@ -1792,7 +1797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -2181,6 +2185,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1552002371}
     - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
+      propertyPath: fuelSlider
+      value: 
+      objectReference: {fileID: 554513242}
+    - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
       propertyPath: playCanvas
       value: 
       objectReference: {fileID: 996182825}
@@ -2190,7 +2198,7 @@ PrefabInstance:
       objectReference: {fileID: 251780629}
     - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
       propertyPath: LEVEL_PARTS.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
       propertyPath: LEVEL_PARTS.Array.data[2]
@@ -2207,11 +2215,15 @@ PrefabInstance:
     - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
       propertyPath: LEVEL_PARTS.Array.data[5]
       value: 
-      objectReference: {fileID: 4446617881715710641, guid: 5dee73cbcb34a3a419450e8fee5fdf36, type: 3}
+      objectReference: {fileID: 4446617881715710641, guid: 1132465261ccaa04c8537cdc8e56fa41, type: 3}
     - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
       propertyPath: LEVEL_PARTS.Array.data[6]
       value: 
-      objectReference: {fileID: 4446617881715710641, guid: 29ef606e902c920409ee8a7697998f7b, type: 3}
+      objectReference: {fileID: 4446617881715710641, guid: ea2736cd7f4796d45bc750e9ab1a7d98, type: 3}
+    - target: {fileID: 829193428315044373, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
+      propertyPath: LEVEL_PARTS.Array.data[7]
+      value: 
+      objectReference: {fileID: 4446617881715710641, guid: 273d52784617536459254a8a2d518bc7, type: 3}
     - target: {fileID: 829193428315044378, guid: 07fcb8bf0f1614efa8244f37d654072b, type: 3}
       propertyPath: m_RootOrder
       value: 2
