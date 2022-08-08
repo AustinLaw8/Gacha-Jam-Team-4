@@ -71,11 +71,12 @@ public class GameManager : MonoBehaviour
         if (player == null) player = GameObject.Find("Player").GetComponent<Player>();
         if (scoreText == null) scoreText = GameObject.Find("Score Text").GetComponent<TMP_Text>();
         if (fuelSlider == null) fuelSlider = GameObject.Find("Fuel Slider");
+        if (music == null) music = GameObject.Find("Music").GetComponent<AudioSource>();
+        // music.gameObject.GetComponent<MusicController>().SetVolume();
         score = 0;
         currentSection = Instantiate(SECTION_BLANK, Vector3.zero, Quaternion.identity);
         currentSpeed = START_SPEED;
         GenerateNextPart();
-        
     }
 
     void Update()
@@ -128,8 +129,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         if (!pauseMenu.activeSelf) {
             pauseMenu.SetActive(true);
-            GameObject.Find("Audio Settings Menu").SetActive(false);
-            GameObject.Find("Instructions Canvas").SetActive(false);
+            GameObject audio = GameObject.Find("Audio Settings Menu");
+            GameObject inst = GameObject.Find("Instructions Canvas");
+            if (audio) audio.SetActive(false);
+            if (inst) inst.SetActive(false);
         }
     }
 
@@ -157,6 +160,9 @@ public class GameManager : MonoBehaviour
 
     public void OnVolumeChange()
     {
-        music.volume = GameObject.Find("Volume Slider").GetComponent<Slider>().value;
+        float val = GameObject.Find("Volume Slider").GetComponent<Slider>().value;
+        music.volume = val;
+        foreach (var source in player.GetComponents<AudioSource>())
+            source.volume = val;
     }
 }

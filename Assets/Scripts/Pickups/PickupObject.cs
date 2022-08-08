@@ -10,6 +10,7 @@ public abstract class PickupObject : MonoBehaviour
     {
         if (data.gameObject.tag == "Player")
         {
+            data.GetComponent<Player>().PlayPickupSound();
             pickupAction(data.GetComponent<Player>());
             Destroy(this.gameObject);
         }
