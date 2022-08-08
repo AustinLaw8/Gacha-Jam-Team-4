@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private static float BOOST_TIME = 10f;
     private static float RESTORATION_TIME = .33f;
     private static float MAX_TIME_OFF_SCREEN = 2f;
+    [SerializeField] private AudioClip jetpack;
+    [SerializeField] private AudioClip screech;
+    [SerializeField] private AudioClip pickup;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject instructionsCanvas;
     [SerializeField] private float jumpAmount = 100f;
@@ -20,6 +23,7 @@ public class Player : MonoBehaviour
 
     private float timeOffScreen;
     private Animator anim;
+    private AudioSource[] audioSources;
     private float boostTimer;
     private Rigidbody2D rb;
 
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
         flying = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audioSources = GetComponents<AudioSource>();
         if (gameManager == null) gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         if (instructionsCanvas == null) instructionsCanvas = GameObject.Find("Instructions Canvas");
     }
@@ -43,11 +48,17 @@ public class Player : MonoBehaviour
             if (fuel > 0)
             {
                 anim.Play("CatFly");
+                if (!(audioSources[0].clip == jetpack && audioSources[0].isPlaying)){
+                    audioSources[0].clip = jetpack;
+                    audioSources[0].time = 1f;
+                    audioSources[0].Play();
+                }
                 rb.velocity = new Vector3(rb.velocity.x, jumpAmount, 0);
                 fuel -= 10 * Time.deltaTime;
             }
             else
             {
+                if (audioSources[0].clip == jetpack && audioSources[0].isPlaying) audioSources[0].Stop();
                 if (grounded)
                 {
                     anim.Play("CatFall");
@@ -62,6 +73,7 @@ public class Player : MonoBehaviour
         } 
         else
         {
+            if (audioSources[0].clip == jetpack && audioSources[0].isPlaying) audioSources[0].Stop();
             if (rb.velocity.y < 0)
             {
                 anim.Play("CatFall");
@@ -128,6 +140,10 @@ public class Player : MonoBehaviour
 
     public void die()
     {
+        if (audioSources[0].isPlaying) audioSources[0].Stop();
+        if (audioSources[1].isPlaying) audioSources[1].Stop();
+        audioSources[0].clip = screech;
+        audioSources[0].Play();
         gameManager.OnPlayerDie();
     }
 
@@ -149,5 +165,11 @@ public class Player : MonoBehaviour
         {
             die();
         }
+    }
+
+    public void PlayPickupSound()
+    {
+        audioSources[1].clip = pickup;
+        audioSources[1].Play();
     }
 }
